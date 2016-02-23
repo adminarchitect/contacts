@@ -1,0 +1,27 @@
+{
+    "name": "adminarchitect/contacts",
+    "description": "Admin Architect - Contacts",
+    "keywords": [
+        "admin architect",
+        "laravel",
+        "contacts",
+        "contact page",
+        "laravel contacts"
+    ],
+    "authors": [
+        {
+            "name": "endi",
+            "email": "endi@terranet.md"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-0": {
+            "Terranet\\Contacts": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}
