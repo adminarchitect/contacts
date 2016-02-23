@@ -33,49 +33,6 @@ class Contacts
      */
     protected $address;
 
-    public function setAbout($about)
-    {
-        $this->about = $about;
-
-        return $this;
-    }
-
-    /**
-     * Set main address
-     *
-     * @param $address
-     * @param bool $enableGeoCoding
-     * @return $this
-     */
-    public function setAddress($address, $enableGeoCoding = true)
-    {
-        $this->address = $address;
-
-        if ($enableGeoCoding)
-            $this->geocodeAddress($address);
-
-        return $this;
-    }
-
-    /**
-     * Geocode address to coordinates
-     *
-     * @param $address
-     */
-    protected function geocodeAddress($address)
-    {
-        if ($location = (new Geocoder($address))->getLocation()) {
-            $this->setLocation($location);
-        }
-    }
-
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
     /**
      * Register new department
      *
@@ -83,7 +40,7 @@ class Contacts
      * @param Closure $callback
      * @return $this
      */
-    public function create($name, Closure $callback)
+    public function department($name, Closure $callback)
     {
         $department = $this->createDepartment($name);
 
@@ -107,8 +64,97 @@ class Contacts
         return new Department($name);
     }
 
-    public function lists()
+    /**
+     * Fetch all departments
+     *
+     * @return Collection|null
+     */
+    public function departments()
     {
         return self::$departments;
+    }
+
+    public function render()
+    {
+        return view('contacts::templates.' . config('contacts.template'))->with([
+            'about' => $this->getAbout(),
+            'location' => $this->getLocation(),
+            'address' => $this->getAddress(),
+            'departments' => $this->departments()
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    public function setAbout($about)
+    {
+        $this->about = $about;
+
+        return $this;
+    }
+
+    /**
+     * @return Location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * Set main location
+     *
+     * @param Location $location
+     * @return $this
+     */
+    public function setLocation(Location $location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set main address
+     *
+     * @param $address
+     * @param bool $enableGeoCoding
+     * @return $this
+     */
+    public function setAddress($address, $enableGeoCoding = true)
+    {
+        $this->address = $address;
+
+        if ($enableGeoCoding) {
+            $this->geocodeAddress($address);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Geocode address to coordinates
+     *
+     * @param $address
+     */
+    protected function geocodeAddress($address)
+    {
+        if ($location = (new Geocoder($address))->getLocation()) {
+            $this->setLocation($location);
+        }
     }
 }
