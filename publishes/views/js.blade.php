@@ -2,7 +2,7 @@
     var markers = [];
     setTimeout(function() {
     @if ($location)
-        markers.push(contacts_addMarker('{{ $about }}', {
+        markers.push(contacts_addMarker('{{ $description }}', {
             lat: {{ $location->getLat() }},
             lng: {{ $location->getLng() }}
         }));
@@ -58,7 +58,11 @@
         }
 
         function contacts_addMarker(title, location) {
-            return new google.maps.Marker({
+            var infowindow = new google.maps.InfoWindow({
+                content: title
+            });
+
+            var marker = new google.maps.Marker({
                 position: {
                     lat: location.lat,
                     lng: location.lng
@@ -67,6 +71,12 @@
                 title: title,
                 animation: google.maps.Animation.DROP
             });
+
+            marker.addListener('click', function() {
+                infowindow.open(contacts__map, marker);
+            });
+
+            return marker;
         }
     </script>
 @append

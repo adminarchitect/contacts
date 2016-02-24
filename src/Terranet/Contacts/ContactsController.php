@@ -9,7 +9,7 @@ class ContactsController extends Controller
     public function index(Contacts $contacts)
     {
         $contacts
-            ->setAbout('Terranet.md is a Web Development Company')
+            ->setDescription('Terranet.md is a Web Development Company')
             ->setAddress('bd. Moscova 20/3, Chisinau, Moldova');
 
         $contacts->department('Sales department', function (Department $department) {

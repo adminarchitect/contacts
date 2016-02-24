@@ -4,8 +4,8 @@
 @section('contacts.content')
     <div class="contacts__title">Contact Us</div>
 
-    @if ($about)
-        <p>{{ $about }}</p>
+    @if ($description)
+        <p>{{ $description }}</p>
     @endif
 
     @if ($address)

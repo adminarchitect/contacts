@@ -2,15 +2,14 @@
 
 namespace Terranet\Contacts;
 
+use Terranet\Contacts\Traits\HasDescription;
+use Terranet\Contacts\Traits\HasLocation;
+
 class Department
 {
+    use HasLocation, HasDescription;
+
     protected $name;
-
-    protected $description;
-
-    protected $address;
-
-    protected $location;
 
     protected $phones;
 
@@ -22,105 +21,11 @@ class Department
     }
 
     /**
-     * @param mixed $description
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $address
-     * @param bool $enableGeoCoding
-     * @return $this
-     */
-    public function setAddress($address, $enableGeoCoding = true)
-    {
-        $this->address = $address;
-
-        if ($enableGeoCoding) {
-            $this->geocodeAddress($address);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Location $location
-     * @return $this
-     */
-    public function setLocation(Location $location)
-    {
-        $this->location = $location;
-
-        return $this;
-    }
-
-    /**
-     * @param array $phones
-     * @return $this
-     */
-    public function setPhones(array $phones = [])
-    {
-        $this->phones = $phones;
-
-        return $this;
-    }
-
-    /**
-     * @param array $emails
-     * @return $this
-     */
-    public function setEmails(array $emails = [])
-    {
-        $this->emails = $emails;
-
-        return $this;
-    }
-
-    /**
-     * @param $address
-     */
-    protected function geocodeAddress($address)
-    {
-        if ($location = (new Geocoder($address))->getLocation()) {
-            $this->setLocation($location);
-        }
-    }
-
-    /**
      * @return mixed
      */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLocation()
-    {
-        return $this->location;
     }
 
     /**
@@ -132,10 +37,49 @@ class Department
     }
 
     /**
+     * @param array $phones
+     * @return $this
+     */
+    public function setPhones(array $phones = [])
+    {
+        $this->phones = $this->prepareArrays($phones);
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getEmails()
     {
         return (array) $this->emails;
+    }
+
+    /**
+     * @param array $emails
+     * @return $this
+     */
+    public function setEmails(array $emails = [])
+    {
+        $this->emails = $this->prepareArrays($emails);
+
+        return $this;
+    }
+
+    /**
+     * Prepare arrays before accepting
+     *
+     * @param array $items
+     * @return array
+     */
+    protected function prepareArrays(array $items = [])
+    {
+        $items = array_map(function ($item) {
+            return trim($item);
+        }, $items);
+
+        return array_filter($items, function ($item) {
+            return ! empty($item);
+        });
     }
 }
