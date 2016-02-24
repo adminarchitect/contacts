@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'template' => 'full', // available: full, two-columns
+    'template' => 'full', // available: full, two-columns, two-rows
     'map' => [
         'key' => '',
         'center' => [

@@ -1,14 +1,14 @@
 @section('contacts.markers')
     var markers = [];
     setTimeout(function() {
-    @if ($location)
-        markers.push(contacts_addMarker('{{ $description }}', {
+    @if ($location = $contacts->getLocation())
+        markers.push(contacts_addMarker('{{ $contacts->getDescription() }}', {
             lat: {{ $location->getLat() }},
             lng: {{ $location->getLng() }}
         }));
     @endif
 
-    @foreach($departments as $dep)
+    @foreach($contacts->departments() as $dep)
         @if ($l = $dep->getLocation())
             markers.push(contacts_addMarker('{{ $dep->getDescription() }}', {
                 lat: {{ $l->getLat() }},

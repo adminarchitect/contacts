@@ -1,27 +1,23 @@
 <div style="padding: 10px;">
-    <h4>{{ $department->getName() }}</h4>
+    <h4>{{ $department->getTitle() }}</h4>
 
-    <ul>
+    <ul class="contacts__departments_list">
         <li>
             {{ $department->getDescription() }}
         </li>
         <li>
-            <span>Address: </span>{{ $department->getAddress() }}
+            <address>{{ $department->getAddress() }}</address>
         </li>
-        @if ($emails = $department->getEmails())
-            <li>
-                <span>Email: </span>
-                {!! join(', ', array_map(function ($email) {
-                    return link_to('mailto:' . $email, $email);
-                }, $emails)) !!}
-            </li>
-        @endif
         @if ($phones = $department->getPhones())
             <li>
                 <span>Phone: </span>
-                {!! join(', ', array_map(function ($phone) {
-                    return link_to('tel:' . $phone, $phone);
-                }, $phones)) !!}
+                {!! \contacts\list_phones($phones) !!}
+            </li>
+        @endif
+        @if ($emails = $department->getEmails())
+            <li>
+                <span>Email: </span>
+                {!! \contacts\list_emails($emails) !!}
             </li>
         @endif
     </ul>

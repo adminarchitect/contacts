@@ -58,6 +58,11 @@
             background: white;
             border-radius: 10px;
         }
+
+        .two-rows > div {
+            float: left;
+            width: 300px;
+        }
     </style>
 
     @yield('contacts.initJS')

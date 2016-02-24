@@ -1,32 +1,22 @@
 <?php
 
-namespace Terranet\Contacts;
+namespace Terranet\Contacts\Traits;
 
-use Terranet\Contacts\Traits\HasDescription;
-use Terranet\Contacts\Traits\HasLocation;
-
-class Department
+trait HasContacts
 {
-    use HasLocation, HasDescription;
-
-    protected $name;
-
-    protected $phones;
-
+    /**
+     * List of emails
+     *
+     * @var
+     */
     protected $emails;
 
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
-
     /**
-     * @return mixed
+     * list of phones
+     *
+     * @var
      */
-    public function getName()
-    {
-        return $this->name;
-    }
+    protected $phones;
 
     /**
      * @return array
