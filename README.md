@@ -52,6 +52,16 @@ $contacts->department('Google Detroit', function ($department) {
 return $contacts->render();
 ```
 
-# Result
+# Templates
 
-![Contact page](./publishes/preview.png)
+Choose the template from one of predefined or create new one: `config/contacts.php` section `template`
+
+![Contact page - Default template](./images/full.png)
+
+### two columns
+
+![Contact page - Tow Columns template](./images/two-columns.png)
+
+### Or in rows
+
+![Contact page - Tow Rows template](./images/two-rows.png)
