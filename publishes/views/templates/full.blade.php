@@ -5,7 +5,7 @@
     <div class="contacts__title">Contact Us</div>
 
     @if ($description)
-        <p>{{ $description }}</p>
+        <p>{!! $description !!}</p>
     @endif
 
     @if ($address)

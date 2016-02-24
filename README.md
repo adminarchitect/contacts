@@ -28,7 +28,7 @@ php artisan vendor:publish --provider="Terranet\\Contacts\\ServiceProvider"
 $contacts = new \Terranet\Contacts\Contacts;
 
 $contacts
-    ->setDescription('Terranet.md is a Web Development Company')
+    ->setDescription('Google')
     ->setAddress('bd. Moscova 20/3, Chisinau, Moldova');
     
 // optionally (in case then google maps geocoding unable to detect right location)

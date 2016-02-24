@@ -9,21 +9,23 @@ class ContactsController extends Controller
     public function index(Contacts $contacts)
     {
         $contacts
-            ->setDescription('Terranet.md is a Web Development Company')
-            ->setAddress('bd. Moscova 20/3, Chisinau, Moldova');
+            ->setDescription('<p>We’ve come a long way from the dorm room and the garage. </p>' .
+                '<p>We moved into our headquarters in Mountain View, California—better known as the Googleplex—in 2004. </p>' .
+                '<p>Today Google has more than 70 offices in more than 40 countries around the globe.</p>');
+        //$contacts->setAddress('1600 Amphitheatre Parkway Mountain View, CA 94043');
 
-        $contacts->department('Sales department', function (Department $department) {
-            $department->setDescription('Terranet.md Sales')
-                ->setAddress('bd. Moscova 20/3, Chisinau, Moldova')
-                ->setPhones(['+37322493866'])
-                ->setEmails(['endi1982@gmail.com']);
+        $contacts->department('Google Ann Arbor', function (Department $department) {
+            $department->setDescription('Software development')
+                ->setAddress('201 S. Division St. Suite 500 Ann Arbor, MI 48104')
+                ->setPhones(['+1 734-332-6500'])
+                ->setEmails(['support@google.com']);
         });
 
-        $contacts->department('Development department', function (Department $department) {
-            $department->setDescription('Terranet.md Development')
-                ->setAddress('bd. Moscova 14/1, Chisinau, Moldova')
-                ->setPhones(['+37322493866'])
-                ->setEmails(['endi1982@gmail.com', 'endi@terranet.md']);
+        $contacts->department('Google Detroit', function (Department $department) {
+            $department->setDescription('Software development')
+                ->setAddress('114 Willits Street Birmingham, MI 48009')
+                ->setPhones(['+1 248-593-4000'])
+                ->setEmails(['support@google.com']);
         });
 
         return $contacts->render();
