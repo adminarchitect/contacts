@@ -124,18 +124,18 @@ class Department
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getPhones()
     {
-        return $this->phones;
+        return (array) $this->phones;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getEmails()
     {
-        return $this->emails;
+        return (array) $this->emails;
     }
 }

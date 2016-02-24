@@ -51,7 +51,7 @@
         }
 
         .contacts__departments {
-            width: 40%;
+            width: 30%;
             position: absolute;
             top: 20px;
             left: 20px;

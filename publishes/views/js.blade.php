@@ -50,7 +50,8 @@
                 zoomControl: true,
                 zoomControlOptions: {
                     position: google.maps.ControlPosition.RIGHT_TOP
-                }
+                },
+                streetViewControl: false
             });
 
             @yield('contacts.markers')
